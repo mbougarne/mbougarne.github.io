@@ -1,9 +1,6 @@
 import { FC } from 'react';
+import { Page } from './Page';
 
 export const Settings: FC = () => {
-  return (
-    <>
-      <h1>Settings</h1>
-    </>
-  );
+  return <Page title="Settings"></Page>;
 };

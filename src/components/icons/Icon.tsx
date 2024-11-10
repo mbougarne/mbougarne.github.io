@@ -45,11 +45,6 @@ enum IconNames {
 
 export type IconName = `${IconNames}`;
 
-// interface IconProps {
-//   props?: SvgIconProps,
-//   name: IconName
-// }
-
 type IconProps = SvgIconProps & { name: IconName };
 
 const SvgFromName: FC<{ name: IconName }> = ({ name }) => {

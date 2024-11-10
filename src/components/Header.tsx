@@ -20,7 +20,6 @@ export const Header: FC = () => {
           variant="body1"
           noWrap
           component="p"
-          color="textSecondary"
           sx={{
             fontSize: '14px',
             color: '#2B2F32',

@@ -1,9 +1,6 @@
 import { FC } from 'react';
+import { Page } from './Page';
 
 export const Integrations: FC = () => {
-  return (
-    <>
-      <h1>Integrations</h1>
-    </>
-  );
+  return <Page title="Integrations"></Page>;
 };

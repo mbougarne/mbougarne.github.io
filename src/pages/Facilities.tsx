@@ -1,9 +1,6 @@
 import { FC } from 'react';
+import { Page } from './Page';
 
 export const Facilities: FC = () => {
-  return (
-    <>
-      <h1>Facilities</h1>
-    </>
-  );
+  return <Page title="Facilities"></Page>;
 };

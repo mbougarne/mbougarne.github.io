@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Navigation } from './navigation';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { Header } from './Header';
 
@@ -11,17 +11,20 @@ export const AppContainer: FC = () => {
     <>
       {/* https://mui.com/material-ui/react-css-baseline/ */}
       <CssBaseline />
-      <Container maxWidth="sm">
-        <Box>
-          <Navigation />
-        </Box>
-        <Box
-          component="main"
-          sx={{ bgcolor: 'background.default', height: '100vh' }}>
-          <Header />
-          <Outlet />
-        </Box>
-      </Container>
+      <Box>
+        <Navigation />
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          bgcolor: 'background.default',
+          height: '100vh',
+          width: 'calc(100% - 108px)',
+          ml: '108px',
+        }}>
+        <Header />
+        <Outlet />
+      </Box>
     </>
   );
 };

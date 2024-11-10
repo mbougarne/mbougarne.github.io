@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { App } from '@/App';
 import {
   Automations,
@@ -19,6 +19,10 @@ export const routes = createBrowserRouter([
     errorElement: <RoutesError />,
     children: [
       {
+        index: true,
+        element: <Navigate to="/team" />,
+      },
+      {
         path: 'dashboard',
         element: <Dashboard />,
       },
@@ -27,6 +31,7 @@ export const routes = createBrowserRouter([
         element: <Locks />,
       },
       {
+        index: true,
         path: 'team',
         element: <Team />,
       },

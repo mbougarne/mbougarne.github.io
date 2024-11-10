@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Link, ListItem, ListItemButton, ListItemIcon } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { ListItem, ListItemButton, ListItemIcon } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/icons';
+import HoverPlaceholder from '/public/assets/hover-effect.svg';
 
 const nameToSvg: Record<string, IconName> = {
   automations: 'AutomationsIcon',
@@ -27,31 +28,69 @@ export const Items: FC = () => {
         'integrations',
         'settings',
       ].map((text) => (
-        <Link
+        <NavLink
           key={text}
-          component={RouterLink}
-          to={text}
-          underline="none">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon
+          to={text}>
+          {({ isActive }) => (
+            <ListItem disablePadding>
+              <ListItemButton
                 sx={{
-                  width: 44,
-                  height: 44,
-                  marginY: '13px',
-                  paddingX: '12px',
-                  alignItems: 'center',
-                  alignContent: 'center',
-                  alignSelf: 'center',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                  },
+                  '&:hover::before': {
+                    content: "url('/public/assets/hover-effect.svg')",
+                    display: 'block',
+                    fontSize: 5,
+                    position: 'absolute',
+                    zIndex: -1,
+                  },
+                  '&:hover .css-rumj75-MuiSvgIcon-root': {
+                    backgroundColor: '#258D54',
+                    borderRadius: '50%',
+                  },
                 }}>
-                <Icon
-                  name={nameToSvg[text]}
-                  sx={{ fontSize: 36, color: '#fff' }}
-                />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-        </Link>
+                <ListItemIcon
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    marginY: '13px',
+                    paddingX: '12px',
+                    alignItems: 'center',
+                    alignContent: 'center',
+                    alignSelf: 'center',
+                  }}>
+                  {isActive && (
+                    <i
+                      style={{
+                        display: 'block',
+                        marginLeft: '-12px',
+                        fontSize: 5,
+                        position: 'absolute',
+                        zIndex: -1,
+                      }}>
+                      <HoverPlaceholder />
+                    </i>
+                  )}
+                  <Icon
+                    name={nameToSvg[text]}
+                    sx={{
+                      fontSize: 44,
+                      padding: '7px',
+                      color: '#fff',
+                      textAlign: 'center',
+                      alignSelf: 'center',
+                      ...(isActive && {
+                        backgroundColor: '#258D54',
+                        borderRadius: '50%',
+                      }),
+                    }}
+                  />
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+          )}
+        </NavLink>
       ))}
     </>
   );

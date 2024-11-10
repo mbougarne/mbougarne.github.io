@@ -22,6 +22,7 @@ export const Navigation: FC = () => {
           borderRight: 'none',
           alignItems: 'center',
           justifyContent: 'center',
+          overflowX: 'hidden',
         },
       }}
       variant="permanent"
