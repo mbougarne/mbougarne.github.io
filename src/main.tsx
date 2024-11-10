@@ -1,13 +1,19 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import { App } from './App';
+import { RouterProvider } from 'react-router-dom';
+import { routes } from '@/routes';
+import { AppLoader, ErrorBoundary } from '@/components';
 
 // Supports weights 100-900
-import '@fontsource-variable/inter/opsz-italic.css';
+import '@fontsource-variable/inter/opsz.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <RouterProvider
+        router={routes}
+        fallbackElement={<AppLoader />}
+      />
+    </ErrorBoundary>
   </StrictMode>,
 );
