@@ -45,7 +45,7 @@ export const Items: FC = () => {
                     position: 'absolute',
                     zIndex: -1,
                   },
-                  '&:hover .css-rumj75-MuiSvgIcon-root': {
+                  '&:hover .MuiSvgIcon-root': {
                     backgroundColor: '#258D54',
                     borderRadius: '50%',
                   },

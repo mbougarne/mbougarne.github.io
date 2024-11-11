@@ -4,6 +4,7 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import {
   AddRoleIcon,
   AdminIcon,
+  AdminLockIcon,
   AuthIcon,
   AutomationsIcon,
   BackArrowIcon,
@@ -23,9 +24,9 @@ import {
 } from './svgFiles';
 
 enum IconNames {
-  MannaLogo = 'MannaLogo',
   AddRoleIcon = 'AddRoleIcon',
   AdminIcon = 'AdminIcon',
+  AdminLockIcon = 'AdminLockIcon',
   AuthIcon = 'AuthIcon',
   AutomationsIcon = 'AutomationsIcon',
   BackArrowIcon = 'BackArrowIcon',
@@ -36,6 +37,7 @@ enum IconNames {
   FacilitiesIcon = 'FacilitiesIcon',
   IntegrationsIcon = 'IntegrationsIcon',
   LogoutIcon = 'LogoutIcon',
+  MannaLogo = 'MannaLogo',
   PersonnelIcon = 'PersonnelIcon',
   ReportsIcon = 'ReportsIcon',
   RolesIcon = 'RolesIcon',
@@ -53,6 +55,8 @@ const SvgFromName: FC<{ name: IconName }> = ({ name }) => {
       return <AddRoleIcon />;
     case 'AdminIcon':
       return <AdminIcon />;
+    case 'AdminLockIcon':
+      return <AdminLockIcon />;
     case 'AuthIcon':
       return <AuthIcon />;
     case 'AutomationsIcon':

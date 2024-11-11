@@ -16,6 +16,7 @@ export const RoleCardAvatar: FC = () => {
           sx={{
             overflow: 'visible',
             marginLeft: '-40px',
+            color: '#C4C4C4',
           }}
         />
       </Box>
