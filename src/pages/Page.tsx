@@ -1,11 +1,17 @@
 import { FC, PropsWithChildren } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
+import { BackButton } from '@/components';
 
 interface Props {
   title: string;
+  showBackButton?: boolean;
 }
 
-export const Page: FC<PropsWithChildren<Props>> = ({ children, title }) => {
+export const Page: FC<PropsWithChildren<Props>> = ({
+  children,
+  title,
+  showBackButton,
+}) => {
   return (
     <Box
       sx={{
@@ -13,17 +19,28 @@ export const Page: FC<PropsWithChildren<Props>> = ({ children, title }) => {
         paddingLeft: '24px',
         paddingBottom: '50px',
       }}>
-      <Typography
-        variant="h1"
-        component="h1"
+      <Stack
+        direction="row"
+        spacing={2}
         sx={{
-          fontFamily: 'Inter Variable, sans-serif',
-          fontWeight: 'bold',
-          fontSize: '24px',
-          color: '#2B2F32',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}>
-        {title}
-      </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            component="h1"
+            sx={{
+              fontFamily: 'Inter Variable, sans-serif',
+              fontWeight: 'bold',
+              fontSize: '24px',
+              color: '#2B2F32',
+            }}>
+            {title}
+          </Typography>
+        </Box>
+        {showBackButton && <BackButton />}
+      </Stack>
       {children}
     </Box>
   );

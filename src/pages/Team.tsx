@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Page } from './Page';
 import { Box, Grid2 as Grid } from '@mui/material';
 import { AddRoleCard, RoleCard } from '@/components/roles';
+import { Page } from './Page';
 
 export const Team: FC = () => {
   return (

@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { App } from '@/App';
 import {
+  AddRole,
   Automations,
   Dashboard,
   Facilities,
@@ -9,6 +10,7 @@ import {
   Reports,
   Settings,
   Team,
+  TeamOutlet,
 } from '@/pages';
 import { RoutesError } from '@/components';
 
@@ -20,7 +22,7 @@ export const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/team" />,
+        element: <Navigate to="/team/" />,
       },
       {
         path: 'dashboard',
@@ -31,9 +33,17 @@ export const routes = createBrowserRouter([
         element: <Locks />,
       },
       {
-        index: true,
-        path: 'team',
-        element: <Team />,
+        element: <TeamOutlet />,
+        children: [
+          {
+            path: 'team',
+            element: <Team />,
+          },
+          {
+            path: 'team/add-role',
+            element: <AddRole />,
+          },
+        ],
       },
       {
         path: 'facilities',

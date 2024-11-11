@@ -3,9 +3,13 @@ import { Box, Button, CardActions, Typography } from '@mui/material';
 
 interface RoleCardActionProps {
   title: string;
+  onClickHandler?: () => void;
 }
 
-export const RoleCardAction: FC<RoleCardActionProps> = ({ title }) => {
+export const RoleCardAction: FC<RoleCardActionProps> = ({
+  title,
+  onClickHandler,
+}) => {
   return (
     <Box
       sx={{
@@ -15,6 +19,7 @@ export const RoleCardAction: FC<RoleCardActionProps> = ({ title }) => {
         <Button
           size="small"
           component="a"
+          onClick={onClickHandler}
           sx={{
             '&:hover': {
               backgroundColor: 'transparent',

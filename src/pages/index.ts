@@ -6,3 +6,5 @@ export { Locks } from './Locks';
 export { Reports } from './Reports';
 export { Settings } from './Settings';
 export { Team } from './Team';
+export { TeamOutlet } from './TeamOutlet';
+export { AddRole } from './subpage';

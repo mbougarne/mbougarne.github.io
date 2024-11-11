@@ -2,8 +2,15 @@ import { FC } from 'react';
 import { Box, Card } from '@mui/material';
 import { Icon } from '@/components/icons';
 import { RoleCardAction } from './Action';
+import { useNavigate } from 'react-router-dom';
 
 export const AddRoleCard: FC = () => {
+  const navigate = useNavigate();
+
+  const onAddRoleClicked = () => {
+    navigate('add-role');
+  };
+
   return (
     <Card
       sx={{
@@ -36,7 +43,10 @@ export const AddRoleCard: FC = () => {
             }}
           />
         </Box>
-        <RoleCardAction title="Add Custom Role" />
+        <RoleCardAction
+          title="Add Custom Role"
+          onClickHandler={onAddRoleClicked}
+        />
       </Box>
     </Card>
   );
