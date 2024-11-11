@@ -1,4 +1,4 @@
-export { default as MannaLogo } from '@/manna_logo.svg';
+export { default as MannaLogo } from '@/assets/manna_logo.svg';
 export { default as AddRoleIcon } from '@/assets/add-role.svg';
 export { default as AdminIcon } from '@/assets/admin.svg';
 export { default as AuthIcon } from '@/assets/auth.svg';
