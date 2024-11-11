@@ -30,7 +30,7 @@ export const Navigation: FC = () => {
       <Toolbar sx={{ display: 'block', alignSelf: 'normal', top: '-75px' }}>
         <Icon
           name="MannaLogo"
-          sx={{ overflow: 'visible' }}
+          sx={{ overflow: 'visible', color: '#FCFCFC' }}
         />
       </Toolbar>
       <List>

@@ -39,7 +39,7 @@ export const Items: FC = () => {
                     backgroundColor: 'transparent',
                   },
                   '&:hover::before': {
-                    content: "url('/public/assets/hover-effect.svg')",
+                    content: "url('src/assets/hover-effect.svg')",
                     display: 'block',
                     fontSize: 5,
                     position: 'absolute',
