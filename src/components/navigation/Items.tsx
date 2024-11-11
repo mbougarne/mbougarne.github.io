@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ListItem, ListItemButton, ListItemIcon } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/icons';
-import HoverPlaceholder from '/public/assets/hover-effect.svg';
+import HoverPlaceholder from '@/assets/hover-effect.svg';
 
 const nameToSvg: Record<string, IconName> = {
   automations: 'AutomationsIcon',
