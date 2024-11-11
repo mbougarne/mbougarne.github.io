@@ -18,7 +18,7 @@ export const RoleCardContent: FC = () => {
       <Box>
         <RoleCardAvatar />
         <RoleCardDetail />
-        <RoleCardAction />
+        <RoleCardAction title="Use As Template" />
       </Box>
     </CardContent>
   );

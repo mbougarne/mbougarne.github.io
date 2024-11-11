@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Page } from './Page';
-import { Box } from '@mui/material';
-import { RoleCard } from '@/components/roles';
+import { Box, Grid2 as Grid } from '@mui/material';
+import { AddRoleCard, RoleCard } from '@/components/roles';
 
 export const Team: FC = () => {
   return (
@@ -10,7 +10,31 @@ export const Team: FC = () => {
         sx={{
           marginTop: '24px',
         }}>
-        <RoleCard />
+        <Grid
+          container
+          spacing="24px">
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <RoleCard />
+          </Grid>
+          <Grid>
+            <AddRoleCard />
+          </Grid>
+        </Grid>
       </Box>
     </Page>
   );

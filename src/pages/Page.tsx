@@ -11,6 +11,7 @@ export const Page: FC<PropsWithChildren<Props>> = ({ children, title }) => {
       sx={{
         paddingTop: '88px',
         paddingLeft: '24px',
+        paddingBottom: '50px',
       }}>
       <Typography
         variant="h1"

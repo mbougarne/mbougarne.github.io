@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import { Box, Button, CardActions, Typography } from '@mui/material';
 
-export const RoleCardAction: FC = () => {
+interface RoleCardActionProps {
+  title: string;
+}
+
+export const RoleCardAction: FC<RoleCardActionProps> = ({ title }) => {
   return (
     <Box
       sx={{
@@ -27,7 +31,7 @@ export const RoleCardAction: FC = () => {
               color: '#33C173',
               textDecoration: 'underline',
             }}>
-            Use as Template
+            {title}
           </Typography>
         </Button>
       </CardActions>
