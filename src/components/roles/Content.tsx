@@ -4,8 +4,16 @@ import { Box, CardContent } from '@mui/material';
 import { RoleCardAvatar } from './Avatar';
 import { RoleCardDetail } from './Detail';
 import { RoleCardAction } from './Action';
+import { IUserRole } from '@/types';
+import { useNavigate } from 'react-router-dom';
 
-export const RoleCardContent: FC = () => {
+export const RoleCardContent: FC<{ role: IUserRole }> = ({ role }) => {
+  const navigate = useNavigate();
+
+  const onActionClicked = () => {
+    navigate('add-role', { state: { role } });
+  };
+
   return (
     <CardContent
       sx={{
@@ -16,9 +24,15 @@ export const RoleCardContent: FC = () => {
         padding: 0,
       }}>
       <Box>
-        <RoleCardAvatar />
-        <RoleCardDetail />
-        <RoleCardAction title="Use As Template" />
+        <RoleCardAvatar
+          name={role.name}
+          roleIcon={role.roleIcon}
+        />
+        <RoleCardDetail usersAssigned={role.usersAssigned} />
+        <RoleCardAction
+          title="Use As Template"
+          onClickHandler={onActionClicked}
+        />
       </Box>
     </CardContent>
   );

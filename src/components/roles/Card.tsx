@@ -3,8 +3,13 @@ import { Card, Grow } from '@mui/material';
 
 import { RoleCardHeader } from './Header';
 import { RoleCardContent } from './Content';
+import { IUserRole } from '@/types';
 
-export const RoleCard: FC = () => {
+interface RoleCardProps {
+  role: IUserRole;
+}
+
+export const RoleCard: FC<RoleCardProps> = ({ role }) => {
   return (
     <Grow
       in={true}
@@ -21,8 +26,8 @@ export const RoleCard: FC = () => {
             filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
           },
         }}>
-        <RoleCardHeader />
-        <RoleCardContent />
+        <RoleCardHeader isCustom={role.isCustom} />
+        <RoleCardContent role={role} />
       </Card>
     </Grow>
   );

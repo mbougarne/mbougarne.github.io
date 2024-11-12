@@ -13,6 +13,8 @@ import {
   TeamOutlet,
 } from '@/pages';
 import { RoutesError } from '@/components';
+import { loadRoles } from '@/loaders';
+import { IUserRole } from '@/types';
 
 export const routes = createBrowserRouter([
   {
@@ -38,6 +40,18 @@ export const routes = createBrowserRouter([
           {
             path: 'team',
             element: <Team />,
+            loader: async () => {
+              const response = await loadRoles();
+              const data: IUserRole[] = await response.json();
+
+              if (!response.ok) {
+                throw new Response('Cannot make request to Roles endpoint', {
+                  status: 500,
+                });
+              }
+
+              return data;
+            },
           },
           {
             path: 'team/add-role',

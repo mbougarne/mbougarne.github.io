@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Icon } from '@/components/icons';
+import { IUserRole } from '@/types';
 
-export const RoleCardDetail: FC = () => {
+type RoleCardDetailProps = Pick<IUserRole, 'usersAssigned'>;
+
+export const RoleCardDetail: FC<RoleCardDetailProps> = ({ usersAssigned }) => {
   return (
     <Box
       sx={{
@@ -27,7 +30,7 @@ export const RoleCardDetail: FC = () => {
           sx={{
             textAlign: 'center',
           }}>
-          1,386
+          {usersAssigned}
         </Typography>
       </Box>
       <Box

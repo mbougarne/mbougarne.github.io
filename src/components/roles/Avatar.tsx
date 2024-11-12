@@ -1,8 +1,19 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
-import { Icon } from '@/components/icons';
+import { Icon, IconName } from '@/components/icons';
+import { IUserRole } from '@/types';
 
-export const RoleCardAvatar: FC = () => {
+type RoleCardAvatarProps = Pick<IUserRole, 'name' | 'roleIcon'>;
+
+const iconIndexName: Record<number, IconName> = {
+  0: 'AdminIcon',
+  1: 'PersonnelIcon',
+  2: 'AdminLockIcon',
+  3: 'VendorIcon',
+  4: 'CallCenterAgentIcon',
+};
+
+export const RoleCardAvatar: FC<RoleCardAvatarProps> = ({ name, roleIcon }) => {
   return (
     <Box>
       <Box
@@ -12,7 +23,7 @@ export const RoleCardAvatar: FC = () => {
           textAlign: 'center',
         }}>
         <Icon
-          name="AdminIcon"
+          name={iconIndexName[roleIcon]}
           sx={{
             overflow: 'visible',
             marginLeft: '-40px',
@@ -27,7 +38,7 @@ export const RoleCardAvatar: FC = () => {
           color: 'colors.textHeadline',
           textAlign: 'center',
         }}>
-        Admin
+        {name}
       </Typography>
     </Box>
   );
