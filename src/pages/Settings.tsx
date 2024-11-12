@@ -5,6 +5,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  Grow,
   Radio,
   RadioGroup,
   useColorScheme,
@@ -21,7 +22,9 @@ export const Settings: FC = () => {
   return (
     <Page title="Settings">
       <Box sx={{ marginTop: '24px' }}>
-        <Box>
+        <Grow
+          in={true}
+          timeout={750}>
           <FormControl>
             <FormLabel id="demo-theme-toggle">Theme</FormLabel>
             <RadioGroup
@@ -49,7 +52,7 @@ export const Settings: FC = () => {
               />
             </RadioGroup>
           </FormControl>
-        </Box>
+        </Grow>
       </Box>
     </Page>
   );

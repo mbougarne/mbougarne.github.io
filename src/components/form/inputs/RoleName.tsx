@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, InputLabel, TextField } from '@mui/material';
+import { Box, Grow, InputLabel, TextField } from '@mui/material';
 import { SxProps, Theme } from '@mui/material';
 
 interface CustomRoleNameProps {
@@ -10,29 +10,33 @@ interface CustomRoleNameProps {
 export const CustomRoleName: FC<CustomRoleNameProps> = ({ sx, slotSx }) => {
   const isError = false;
   return (
-    <Box>
-      <InputLabel
-        htmlFor="custom-role-name-input"
-        sx={{
-          fontSize: '14px',
-          color: 'colors.textButton',
-        }}>
-        Custom Role Name
-      </InputLabel>
-      <TextField
-        id="custom-role-name-input"
-        placeholder="Input Custom Role Name"
-        autoFocus={true}
-        required={true}
-        error={isError}
-        helperText={isError && 'Something went wrong...'}
-        slotProps={{
-          input: {
-            sx: slotSx,
-          },
-        }}
-        sx={sx}
-      />
-    </Box>
+    <Grow
+      in={true}
+      timeout={750}>
+      <Box>
+        <InputLabel
+          htmlFor="custom-role-name-input"
+          sx={{
+            fontSize: '14px',
+            color: 'colors.textButton',
+          }}>
+          Custom Role Name
+        </InputLabel>
+        <TextField
+          id="custom-role-name-input"
+          placeholder="Input Custom Role Name"
+          autoFocus={true}
+          required={true}
+          error={isError}
+          helperText={isError && 'Something went wrong...'}
+          slotProps={{
+            input: {
+              sx: slotSx,
+            },
+          }}
+          sx={sx}
+        />
+      </Box>
+    </Grow>
   );
 };

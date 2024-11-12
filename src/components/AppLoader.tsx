@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Box, LinearProgress } from '@mui/material';
+import { Box, Grow, LinearProgress } from '@mui/material';
 import { Icon } from './icons';
 
 export const AppLoader: FC = () => {
@@ -35,23 +35,28 @@ export const AppLoader: FC = () => {
         }}
         value={progress}
       />
-      <Box
-        sx={{
-          minHeight: 'calc(100vh - 14px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Icon
-          name="MannaLogo"
+      <Grow
+        in={true}
+        timeout={1000}>
+        <Box
           sx={{
-            width: '64px',
-            height: '64px',
-            color: '#33C173',
-            overflow: 'visible',
-          }}
-        />
-      </Box>
+            minHeight: 'calc(100vh - 14px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Icon
+            name="MannaLogo"
+            sx={{
+              marginTop: '-100px',
+              width: '64px',
+              height: '64px',
+              color: '#33C173',
+              overflow: 'visible',
+            }}
+          />
+        </Box>
+      </Grow>
     </Box>
   );
 };
