@@ -6,6 +6,7 @@ import {
   CustomRoleName,
   PermissionsButtonControl,
   PermissionsButtons,
+  SelectRoleIcon,
 } from './inputs';
 import {
   permissionsButtonLargeLeft,
@@ -32,15 +33,14 @@ export const RolesForm: FC = () => {
         sx={textField}
         slotSx={textFieldInput}
       />
-      <Box sx={{ marginTop: '24px', marginBottom: '16px' }}>
+      <SelectRoleIcon />
+      <Box sx={{ marginTop: '24px', marginBottom: '12px' }}>
         <Typography
-          variant="h3"
+          variant="h2"
           component="h3"
           sx={{
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 'bold',
             fontSize: '22px',
-            color: '#2B2F32',
+            color: 'colors.textHeadline',
           }}>
           Permissions
         </Typography>

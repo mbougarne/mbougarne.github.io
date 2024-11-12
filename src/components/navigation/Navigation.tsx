@@ -17,7 +17,7 @@ export const Navigation: FC = () => {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#33C173',
+          backgroundColor: 'colors.navbarBg',
           boxShadow: 'none',
           borderRight: 'none',
           alignItems: 'center',
@@ -30,7 +30,7 @@ export const Navigation: FC = () => {
       <Toolbar sx={{ display: 'block', alignSelf: 'normal', top: '-75px' }}>
         <Icon
           name="MannaLogo"
-          sx={{ overflow: 'visible', color: '#FCFCFC' }}
+          sx={{ overflow: 'visible', color: 'colors.navLogo' }}
         />
       </Toolbar>
       <List>

@@ -9,22 +9,20 @@ export const textFieldInput: SxType = {
   height: '52px',
   borderRadius: '8px',
   '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: '#CFD3D4',
+    borderColor: 'colors.border',
   },
 };
 
 export const textField: SxType = {
   marginY: '10px',
   '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: '#33C173!important',
+    borderColor: 'colors.borderHover!important',
   },
 };
 
 export const permissionsLabel = {
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
   fontSize: '12px',
-  color: '#5E6366',
+  color: 'colors.textButton',
 };
 
 export const permissionsButtonLeft: SxType = {
@@ -34,17 +32,15 @@ export const permissionsButtonLeft: SxType = {
   height: '44px',
   borderTopLeftRadius: '8px',
   borderBottomLeftRadius: '8px',
-  backgroundColor: '#EEF3F5',
-  color: '#ABAFB1',
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
+  backgroundColor: 'colors.inActiveButtonBg',
+  color: 'colors.textCaption',
   fontSize: '16px',
   '& .MuiRadio-root': {
     display: 'none',
   },
   '&:has(.Mui-checked)': {
-    backgroundColor: '#33C173',
-    color: '#fff',
+    backgroundColor: 'colors.textButtonCard',
+    color: 'colors.white',
   },
 };
 
@@ -53,17 +49,15 @@ export const permissionsButtonMiddle: SxType = {
   justifyContent: 'center',
   width: '175px',
   height: '44px',
-  backgroundColor: '#EEF3F5',
-  color: '#ABAFB1',
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
+  backgroundColor: 'colors.inActiveButtonBg',
+  color: 'colors.textCaption',
   fontSize: '16px',
   '& .MuiRadio-root': {
     display: 'none',
   },
   '&:has(.Mui-checked)': {
-    backgroundColor: '#33C173',
-    color: '#fff',
+    backgroundColor: 'colors.textButtonCard',
+    color: 'colors.white',
   },
 };
 
@@ -74,17 +68,15 @@ export const permissionsButtonRight: SxType = {
   height: '44px',
   borderTopRightRadius: '8px',
   borderBottomRightRadius: '8px',
-  backgroundColor: '#EEF3F5',
-  color: '#ABAFB1',
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
+  backgroundColor: 'colors.inActiveButtonBg',
+  color: 'colors.textCaption',
   fontSize: '16px',
   '& .MuiRadio-root': {
     display: 'none',
   },
   '&:has(.Mui-checked)': {
-    backgroundColor: '#33C173',
-    color: '#fff',
+    backgroundColor: 'colors.textButtonCard',
+    color: 'colors.white',
   },
 };
 
@@ -96,17 +88,15 @@ export const permissionsButtonLargeLeft: SxType = {
   height: '44px',
   borderTopLeftRadius: '8px',
   borderBottomLeftRadius: '8px',
-  backgroundColor: '#EEF3F5',
-  color: '#ABAFB1',
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
+  backgroundColor: 'colors.inActiveButtonBg',
+  color: 'colors.textCaption',
   fontSize: '16px',
   '& .MuiRadio-root': {
     display: 'none',
   },
   '&:has(.Mui-checked)': {
-    backgroundColor: '#33C173',
-    color: '#fff',
+    backgroundColor: 'colors.textButtonCard',
+    color: 'colors.white',
   },
 };
 
@@ -118,16 +108,14 @@ export const permissionsButtonLargeRight: SxType = {
   height: '44px',
   borderTopRightRadius: '8px',
   borderBottomRightRadius: '8px',
-  backgroundColor: '#EEF3F5',
-  color: '#ABAFB1',
-  fontFamily: 'Inter Variable, sans-serif',
-  fontWeight: 400,
+  backgroundColor: 'colors.inActiveButtonBg',
+  color: 'colors.textCaption',
   fontSize: '16px',
   '& .MuiRadio-root': {
     display: 'none',
   },
   '&:has(.Mui-checked)': {
-    backgroundColor: '#33C173',
-    color: '#fff',
+    backgroundColor: 'colors.textButtonCard',
+    color: 'colors.white',
   },
 };

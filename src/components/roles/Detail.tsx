@@ -7,7 +7,7 @@ export const RoleCardDetail: FC = () => {
     <Box
       sx={{
         marginTop: '38px',
-        color: '#808285',
+        color: 'colors.textBody',
       }}>
       <Box
         sx={{
@@ -22,12 +22,9 @@ export const RoleCardDetail: FC = () => {
           }}
         />
         <Typography
-          variant="h4"
+          variant="body2"
           component="span"
           sx={{
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 'bold',
-            fontSize: '22px',
             textAlign: 'center',
           }}>
           1,386
@@ -39,14 +36,8 @@ export const RoleCardDetail: FC = () => {
           textAlign: 'center',
         }}>
         <Typography
-          variant="h4"
-          component="span"
-          sx={{
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 400,
-            fontSize: '16px',
-            textAlign: 'center',
-          }}>
+          variant="body1"
+          component="span">
           Users Assigned
         </Typography>
       </Box>

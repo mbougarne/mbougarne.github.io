@@ -22,27 +22,18 @@ export const BackButton: FC = () => {
         variant="text"
         onClick={onBackClicked}
         sx={{
+          color: 'colors.textSubtitle',
           '&:hover': {
             backgroundColor: 'transparent',
           },
-          '&:hover .css-aidjpe-MuiTypography-root, &:hover .css-jusfqj-MuiSvgIcon-root':
-            {
-              color: '#33C173',
-            },
+          '&:hover .MuiTypography-root, &:hover .MuiSvgIcon-root': {
+            color: '#33C173',
+          },
         }}>
-        <Icon
-          name="BackArrowIcon"
-          sx={{ color: '#83898C' }}
-        />
+        <Icon name="BackArrowIcon" />
         <Typography
-          variant="caption"
-          component="span"
-          sx={{
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 400,
-            fontSize: '14px',
-            color: '#83898C',
-          }}>
+          variant="subtitle1"
+          component="span">
           Back
         </Typography>
       </Button>

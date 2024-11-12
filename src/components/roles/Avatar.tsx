@@ -16,17 +16,15 @@ export const RoleCardAvatar: FC = () => {
           sx={{
             overflow: 'visible',
             marginLeft: '-40px',
-            color: '#C4C4C4',
+            color: 'colors.cardIcon',
           }}
         />
       </Box>
       <Typography
-        variant="h3"
+        variant="h2"
+        component="h4"
         sx={{
-          fontFamily: 'Inter Variable, sans-serif',
-          fontWeight: 'bold',
-          fontSize: '22px',
-          color: '#2B2F32',
+          color: 'colors.textHeadline',
           textAlign: 'center',
         }}>
         Admin

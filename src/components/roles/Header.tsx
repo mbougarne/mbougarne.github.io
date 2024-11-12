@@ -7,23 +7,28 @@ export const RoleCardHeader: FC = () => {
     <CardHeader
       action={
         <>
-          <IconButton aria-label="edit role">
-            <Icon name="EditIcon" />
+          <IconButton
+            aria-label="edit role"
+            sx={{ '&:hover': { backgroundColor: 'transparent' } }}>
+            <Icon
+              name="EditIcon"
+              sx={{ color: 'colors.textButtonCard' }}
+            />
           </IconButton>
-          <IconButton aria-label="delete role">
-            <Icon name="DeleteIcon" />
+          <IconButton
+            aria-label="delete role"
+            sx={{ '&:hover': { backgroundColor: 'transparent' } }}>
+            <Icon
+              name="DeleteIcon"
+              sx={{ color: 'colors.textButtonCard' }}
+            />
           </IconButton>
         </>
       }
       title={
         <Typography
-          variant="caption"
-          sx={{
-            color: '#808285',
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 400,
-            fontSize: '12px',
-          }}>
+          variant="subtitle2"
+          sx={{ color: 'colors.textBody' }}>
           Default Role
         </Typography>
       }

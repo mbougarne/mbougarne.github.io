@@ -9,10 +9,8 @@ export const SelectRoleIcon: FC = () => {
         htmlFor="select-role-icon"
         sx={{
           marginY: '10px',
-          fontFamily: 'Inter Variable, sans-serif',
-          fontWeight: 400,
           fontSize: '14px',
-          color: '#5E6366',
+          color: 'colors.textButton',
         }}>
         Select Role Icon
       </InputLabel>

@@ -11,20 +11,17 @@ export const Header: FC = () => {
         height: '64px',
         width: `calc(100% - 108px)`,
         ml: `108px`,
-        backgroundColor: '#ECECEE',
+        backgroundColor: 'colors.topBarBg',
         boxShadow: 'none',
         alignItems: 'flex-end',
       }}>
       <Toolbar sx={{ alignItems: 'center' }}>
         <Typography
-          variant="body1"
+          variant="h3"
           noWrap
           component="p"
           sx={{
-            fontSize: '14px',
-            color: '#2B2F32',
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: '400',
+            color: 'colors.textHeadline',
             marginRight: '12px',
           }}>
           Mathew Keller

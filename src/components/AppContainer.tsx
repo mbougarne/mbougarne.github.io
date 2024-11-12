@@ -17,7 +17,7 @@ export const AppContainer: FC = () => {
       <Box
         component="main"
         sx={{
-          bgcolor: 'background.default',
+          bgcolor: 'colors.defaultBg',
           height: '100vh',
           width: 'calc(100% - 108px)',
           ml: '108px',

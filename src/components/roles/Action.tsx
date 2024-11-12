@@ -29,11 +29,7 @@ export const RoleCardAction: FC<RoleCardActionProps> = ({
             variant="body1"
             component="h4"
             sx={{
-              fontFamily: 'Inter Variable, sans-serif',
-              fontWeight: 400,
-              fontSize: '16px',
-              textAlign: 'center',
-              color: '#33C173',
+              color: 'colors.textButtonCard',
               textDecoration: 'underline',
             }}>
             {title}

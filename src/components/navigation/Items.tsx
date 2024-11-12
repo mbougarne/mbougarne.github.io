@@ -1,8 +1,14 @@
 import { FC } from 'react';
-import { ListItem, ListItemButton, ListItemIcon } from '@mui/material';
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  useColorScheme,
+} from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/icons';
 import HoverPlaceholder from '@/assets/hover-effect.svg';
+import HoverPlaceholderDark from '@/assets/hover-effect-dark.svg';
 
 const nameToSvg: Record<string, IconName> = {
   automations: 'AutomationsIcon',
@@ -16,6 +22,13 @@ const nameToSvg: Record<string, IconName> = {
 };
 
 export const Items: FC = () => {
+  const { mode } = useColorScheme();
+
+  const HoverEffect = () =>
+    mode === 'dark' ? <HoverPlaceholderDark /> : <HoverPlaceholder />;
+  const cssAfterSvg: string =
+    mode === 'dark' ? 'hover-effect-dark' : 'hover-effect';
+
   return (
     <>
       {[
@@ -39,14 +52,14 @@ export const Items: FC = () => {
                     backgroundColor: 'transparent',
                   },
                   '&:hover::before': {
-                    content: "url('/src/assets/hover-effect.svg')",
+                    content: `url("/src/assets/${cssAfterSvg}.svg")`,
                     display: 'block',
                     fontSize: 5,
                     position: 'absolute',
                     zIndex: -1,
                   },
                   '&:hover .MuiSvgIcon-root': {
-                    backgroundColor: '#258D54',
+                    backgroundColor: 'colors.navIconHover',
                     borderRadius: '50%',
                   },
                 }}>
@@ -69,7 +82,7 @@ export const Items: FC = () => {
                         position: 'absolute',
                         zIndex: -1,
                       }}>
-                      <HoverPlaceholder />
+                      <HoverEffect />
                     </i>
                   )}
                   <Icon
@@ -77,11 +90,11 @@ export const Items: FC = () => {
                     sx={{
                       fontSize: 44,
                       padding: '7px',
-                      color: '#fff',
+                      color: 'colors.navIcon',
                       textAlign: 'center',
                       alignSelf: 'center',
                       ...(isActive && {
-                        backgroundColor: '#258D54',
+                        backgroundColor: 'colors.navIconHover',
                         borderRadius: '50%',
                       }),
                     }}

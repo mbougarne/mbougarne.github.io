@@ -4,15 +4,15 @@ import SelectRolIcon, { IconContainerProps } from '@mui/material/Rating';
 
 import { Icon } from '@/components';
 
-const StyledIcon = styled(SelectRolIcon)(() => ({
+const StyledIcon = styled(SelectRolIcon)(({ theme }) => ({
   '& .MuiRating-icon .MuiSvgIcon-root': {
-    color: '#33C173',
+    color: theme.palette.colors.textButtonCard,
     overflow: 'visible',
     fontSize: '14px',
     marginRight: '12px',
   },
   '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
-    color: '#ABAFB1',
+    color: theme.palette.colors.textCaption,
     fontSize: '14px',
     marginRight: '12px',
   },

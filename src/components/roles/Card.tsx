@@ -10,7 +10,8 @@ export const RoleCard: FC = () => {
       sx={{
         width: 303,
         minHeight: 378,
-        border: '1px solid #33C173',
+        border: '1px solid transparent',
+        borderColor: 'primary.main',
         borderRadius: '8px',
         boxShadow: 'none',
         '&:hover': {

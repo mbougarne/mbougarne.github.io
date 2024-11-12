@@ -13,13 +13,10 @@ export const AddRole: FC = () => {
           marginTop: '24px',
         }}>
         <Typography
-          variant="body1"
+          variant="h3"
           component="p"
           sx={{
-            fontFamily: 'Inter Variable, sans-serif',
-            fontWeight: 400,
-            fontSize: '14px',
-            color: '#83898C',
+            color: 'colors.textSubtitle',
             marginBottom: '24px',
           }}>
           Configure general information and permissions below. Don’t forget to

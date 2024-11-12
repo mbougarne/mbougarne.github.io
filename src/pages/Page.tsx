@@ -30,12 +30,7 @@ export const Page: FC<PropsWithChildren<Props>> = ({
           <Typography
             variant="h1"
             component="h1"
-            sx={{
-              fontFamily: 'Inter Variable, sans-serif',
-              fontWeight: 'bold',
-              fontSize: '24px',
-              color: '#2B2F32',
-            }}>
+            sx={{ color: 'colors.textHeadline' }}>
             {title}
           </Typography>
         </Box>

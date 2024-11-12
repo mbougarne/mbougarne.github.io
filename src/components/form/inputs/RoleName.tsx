@@ -14,10 +14,8 @@ export const CustomRoleName: FC<CustomRoleNameProps> = ({ sx, slotSx }) => {
       <InputLabel
         htmlFor="custom-role-name-input"
         sx={{
-          fontFamily: 'Inter Variable, sans-serif',
-          fontWeight: 400,
           fontSize: '14px',
-          color: '#5E6366',
+          color: 'colors.textButton',
         }}>
         Custom Role Name
       </InputLabel>

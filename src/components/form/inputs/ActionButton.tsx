@@ -16,13 +16,13 @@ export const ActionButton: FC<ActionButtonProps> = ({
       onClick={onClickHandler}
       sx={{
         boxShadow: 'none',
-        backgroundColor: '#F2F4F5',
+        backgroundColor: 'colors.inActiveButtonBg',
         height: '58px',
         width: '375px',
-        color: '#5E6366',
+        color: 'colors.textButton',
         '&:hover': {
-          backgroundColor: '#33C173',
-          color: '#fff',
+          backgroundColor: 'colors.buttonBg',
+          color: 'colors.white',
           boxShadow: 'none',
         },
       }}>
@@ -30,10 +30,7 @@ export const ActionButton: FC<ActionButtonProps> = ({
         variant="button"
         component="span"
         sx={{
-          fontFamily: 'Inter Variable, sans-serif',
-          fontWeight: 400,
-          fontSize: '20px',
-          textTransform: 'none',
+          textTransform: 'capitalize',
         }}>
         {title}
       </Typography>
