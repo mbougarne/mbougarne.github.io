@@ -1,5 +1,5 @@
 import { FC, useEffect, useContext } from 'react';
-import { Box, Grid2 as Grid } from '@mui/material';
+import { Backdrop, Box, CircularProgress, Grid2 as Grid } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
 import { AddRoleCard, RoleCard } from '@/components/roles';
 import { userContext } from '@/store';
@@ -19,7 +19,13 @@ export const Team: FC = () => {
   }, [roles, dispatch]);
 
   if (!state.roles.length) {
-    return null;
+    return (
+      <Backdrop
+        open={true}
+        sx={{ backgroundColor: 'colors.defaultBg' }}>
+        <CircularProgress color="primary" />
+      </Backdrop>
+    );
   }
 
   return (

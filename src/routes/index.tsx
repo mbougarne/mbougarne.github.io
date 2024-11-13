@@ -52,6 +52,9 @@ export const routes = createBrowserRouter([
 
               return data;
             },
+            shouldRevalidate: ({ currentUrl }) => {
+              return currentUrl.pathname === '/team';
+            },
           },
           {
             path: 'team/add-role',
