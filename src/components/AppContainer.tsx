@@ -5,6 +5,7 @@ import { Navigation } from './navigation';
 import { Box } from '@mui/material';
 
 import { Header } from './Header';
+import { ErrorNotification, SuccessNotification } from './notifications';
 
 export const AppContainer: FC = () => {
   return (
@@ -23,6 +24,8 @@ export const AppContainer: FC = () => {
           ml: '108px',
         }}>
         <Header />
+        <SuccessNotification />
+        <ErrorNotification />
         <Outlet />
       </Box>
     </>
