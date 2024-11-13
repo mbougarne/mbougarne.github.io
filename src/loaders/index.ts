@@ -1,6 +1,15 @@
 import { sendRequest } from '@/helpers';
+import { IUserRole } from '@/types';
 
 export const loadRoles = async () => {
-  const result = await sendRequest({ endPoint: 'Roles' });
-  return result;
+  const response = await sendRequest({ endPoint: 'Roles' });
+  const data: IUserRole[] = await response.json();
+
+  if (!response.ok) {
+    throw new Response('Cannot make request to Roles endpoint', {
+      status: 500,
+    });
+  }
+
+  return data;
 };

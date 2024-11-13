@@ -1,1 +1,1 @@
-export { AddRole } from './AddRole';
+export { AddRole, Team } from './team';

@@ -1,0 +1,1 @@
+export { PermissionsContainer } from './Container';

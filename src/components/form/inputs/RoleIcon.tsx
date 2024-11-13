@@ -16,11 +16,14 @@ const StyledIcon = styled(SelectRolIcon)(({ theme }) => ({
     fontSize: '14px',
     marginRight: '12px',
   },
-  '& .css-hlbajn-MuiRating-label': {
+  '& label': {
     display: 'block',
     width: '44px',
     height: '44px',
     marginRight: '16px',
+  },
+  '& .MuiRating-pristine': {
+    display: 'none',
   },
 }));
 
@@ -59,10 +62,16 @@ function IconContainer(props: IconContainerProps) {
   return <span {...other}>{customIcons[value].icon}</span>;
 }
 
-export const RoleIcon: FC = () => (
+interface RoleIconProps {
+  onChange?: (event: React.SyntheticEvent, value: number | null) => void;
+}
+
+export const RoleIcon: FC<RoleIconProps> = ({ onChange }) => (
   <StyledIcon
-    name="role-icon"
-    defaultValue={2}
+    onChange={onChange}
+    name="roleIcon"
+    defaultValue={1}
+    defaultChecked
     IconContainerComponent={IconContainer}
     getLabelText={(value: number) => customIcons[value].label}
     highlightSelectedOnly

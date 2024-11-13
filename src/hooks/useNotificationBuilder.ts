@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 
 import { userContext } from '@/store';
 
@@ -15,36 +15,35 @@ export const useNotificationBuilder: AlertBuilderType = (
 ): AlertBuilderReturnType => {
   const { dispatch, state } = useContext(userContext);
   const { error, notification } = state;
+  const timer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-
-    if (isError) {
-      if (error) {
-        timer = setTimeout(
-          () =>
-            dispatch({
-              type: 'set/error',
-              payload: { error: '' },
-            }),
-          delay,
-        );
-      }
-    } else {
-      if (notification) {
-        timer = setTimeout(
-          () =>
-            dispatch({
-              type: 'set/notification',
-              payload: { notification: '' },
-            }),
-          delay,
-        );
-      }
+    if (isError && error) {
+      timer.current = setTimeout(
+        () =>
+          dispatch({
+            type: 'set/error',
+            payload: { error: '' },
+          }),
+        delay,
+      );
     }
 
-    return () => clearTimeout(timer);
-  }, [delay, dispatch, isError, notification, error]);
+    return () => timer.current && clearTimeout(timer.current);
+  }, [delay, dispatch, isError, error, state.error]);
+
+  useEffect(() => {
+    if (!isError && notification) {
+      timer.current = setTimeout(
+        () =>
+          dispatch({
+            type: 'set/notification',
+            payload: { notification: '' },
+          }),
+        delay,
+      );
+    }
+  }, [delay, dispatch, isError, notification]);
 
   const setNotification: SetterFunction = useCallback(
     (msg: string) => {

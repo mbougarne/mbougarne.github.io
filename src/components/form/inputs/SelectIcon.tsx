@@ -1,8 +1,7 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Box, Grow, InputLabel } from '@mui/material';
-import { RoleIcon } from './RoleIcon';
 
-export const SelectRoleIcon: FC = () => {
+export const SelectRoleIcon: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Grow
       in={true}
@@ -17,7 +16,7 @@ export const SelectRoleIcon: FC = () => {
           }}>
           Select Role Icon
         </InputLabel>
-        <RoleIcon />
+        {children}
       </Box>
     </Grow>
   );

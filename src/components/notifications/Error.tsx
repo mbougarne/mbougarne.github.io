@@ -1,13 +1,13 @@
-import { userContext } from '@/store';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Base } from './Base';
+import { useErrorNotification } from '@/hooks';
 
 export const ErrorNotification: FC = () => {
-  const { state } = useContext(userContext);
+  const { error } = useErrorNotification();
 
   return (
     <Base
-      message={state.notification}
+      message={error}
       isError={true}
     />
   );

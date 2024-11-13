@@ -1,9 +1,9 @@
-import { userContext } from '@/store';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Base } from './Base';
+import { useSuccessNotification } from '@/hooks';
 
 export const SuccessNotification: FC = () => {
-  const { state } = useContext(userContext);
+  const { success } = useSuccessNotification();
 
-  return <Base message={state.notification} />;
+  return <Base message={success} />;
 };

@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import { FormControlLabel, Radio, SxProps, Theme } from '@mui/material';
+import { AccessLevel } from '@/types';
 
 interface PermissionsButtonsProps {
   label: string;
   sx?: SxProps<Theme>;
-  value: string;
+  value: AccessLevel;
 }
 
 export const PermissionsButtonControl: FC<PermissionsButtonsProps> = ({

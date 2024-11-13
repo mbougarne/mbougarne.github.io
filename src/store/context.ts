@@ -5,12 +5,15 @@ export interface InitialContextStateInterface {
   roles: IUserRole[];
   notification: string;
   error: string;
+  role?: IUserRole;
 }
 
+type DispatchType = 'set/notification' | 'set/error' | 'set/roles' | 'set/role';
+
 interface DispatcherInterface {
-  type: string;
+  type: DispatchType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload: Record<string, any>;
+  payload: Partial<Record<keyof InitialContextStateInterface, any>>;
 }
 
 export const initialState: InitialContextStateInterface = {
@@ -40,6 +43,12 @@ export const mainReducer = (
       return {
         ...state,
         roles: [...payload.roles],
+      };
+    }
+    case 'set/role': {
+      return {
+        ...state,
+        roles: [...state.roles, payload.role],
       };
     }
     default:

@@ -1,16 +1,36 @@
-import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { FC, useContext, useEffect } from 'react';
+import { Outlet, useFetcher } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Navigation } from './navigation';
 import { Box } from '@mui/material';
+import { userContext } from '@/store';
 
 import { Header } from './Header';
 import { ErrorNotification, SuccessNotification } from './notifications';
 
 export const AppContainer: FC = () => {
+  const fetcher = useFetcher();
+  const { dispatch } = useContext(userContext);
+
+  useEffect(() => {
+    if (fetcher.data) {
+      dispatch({
+        type: 'set/roles',
+        payload: {
+          roles: fetcher.data,
+        },
+      });
+    }
+  }, [fetcher.data, dispatch]);
+
+  useEffect(() => {
+    if (fetcher.state === 'idle' && !fetcher.data) {
+      fetcher.load('/');
+    }
+  }, [fetcher]);
+
   return (
     <>
-      {/* https://mui.com/material-ui/react-css-baseline/ */}
       <CssBaseline />
       <Box>
         <Navigation />

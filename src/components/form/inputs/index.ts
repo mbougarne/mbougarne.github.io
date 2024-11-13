@@ -1,5 +1,5 @@
 export { ActionButton } from './ActionButton';
-export { PermissionsButtonControl } from './PermissionsButtonControl';
-export { PermissionsButtons } from './PermissionsButtons';
+export { PermissionsContainer } from './permissions';
+export { RoleIcon } from './RoleIcon';
 export { CustomRoleName } from './RoleName';
 export { SelectRoleIcon } from './SelectIcon';

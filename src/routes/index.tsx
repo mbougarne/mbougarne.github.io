@@ -14,13 +14,13 @@ import {
 } from '@/pages';
 import { RoutesError } from '@/components';
 import { loadRoles } from '@/loaders';
-import { IUserRole } from '@/types';
 
 export const routes = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     errorElement: <RoutesError />,
+    loader: loadRoles,
     children: [
       {
         index: true,
@@ -40,21 +40,6 @@ export const routes = createBrowserRouter([
           {
             path: 'team',
             element: <Team />,
-            loader: async () => {
-              const response = await loadRoles();
-              const data: IUserRole[] = await response.json();
-
-              if (!response.ok) {
-                throw new Response('Cannot make request to Roles endpoint', {
-                  status: 500,
-                });
-              }
-
-              return data;
-            },
-            shouldRevalidate: ({ currentUrl }) => {
-              return currentUrl.pathname === '/team';
-            },
           },
           {
             path: 'team/add-role',
