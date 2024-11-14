@@ -25,5 +25,5 @@
       "@/*": ["./src/*", "./dist/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "tests"]
 }
