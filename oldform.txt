@@ -1,445 +1,87 @@
-import { FC, FormEvent, useContext, useState } from 'react';
-import { Box, Grid2 as Grid, Grow, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useErrorNotification, useForm, useSuccessNotification } from '@/hooks';
-import { AccessLevel, ICreateUserRole, IPermission, PermissionType } from '@/types';
+import { FC, FormEventHandler } from 'react';
+import { Box, Grow, Stack, Typography } from '@mui/material';
+import {
+  ICreateUserRole,
+  PermissionType,
+} from '@/types';
+
 import {
   ActionButton,
   CustomRoleName,
-  PermissionsButtonControl,
-  PermissionsButtons,
+  PermissionsContainer,
   RoleIcon,
   SelectRoleIcon,
 } from './inputs';
-import {
-  permissionsButtonLargeLeft,
-  permissionsButtonLargeRight,
-  permissionsButtonLeft,
-  permissionsButtonMiddle,
-  permissionsButtonRight,
-  permissionsLabel,
-  textField,
-  textFieldInput,
-} from './styles';
-import { sendRequest } from '@/helpers';
-import { userContext } from '@/store';
+import { textField, textFieldInput } from './styles';
 
-interface UserFormProps {
-  name: string;
-  roleIcon: number;
-  permissions: IPermission[]
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExtractInputKeys<T> = Partial<Record<keyof T, any>>
+interface FormProps {
+  disabled: boolean;
+  values: ICreateUserRole;
+  setValue: (v: ExtractInputKeys<ICreateUserRole>) => void;
+  onSubmit: FormEventHandler<HTMLFormElement> | undefined;
+  onPermissionChange: (id: PermissionType, level: string) => void;
+  onCancelClicked: () => void;
 }
 
-const initialFormState: UserFormProps = {
-  name: '',
-  roleIcon: 0,
-  permissions: [
-    {id: PermissionType.Locks, accessLevel: AccessLevel.None},
-    {id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None},
-    {id: PermissionType.Inventory, accessLevel: AccessLevel.None},
-    {id: PermissionType.TenantLocks, accessLevel: AccessLevel.None},
-    {id: PermissionType.Facilities, accessLevel: AccessLevel.None},
-    {id: PermissionType.TransferFacilities, accessLevel: AccessLevel.None},
-    {id: PermissionType.Users, accessLevel: AccessLevel.None},
-    {id: PermissionType.EditAdmins, accessLevel: AccessLevel.None},
-    {id: PermissionType.Subdomains, accessLevel: AccessLevel.None},
-    {id: PermissionType.ApiSettings, accessLevel: AccessLevel.None},
-  ]
-}
-
-export const Form: FC = () => {
-  const {dispatch} = useContext(userContext);
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const [value, setValue] = useForm<UserFormProps>(initialFormState);
-  const abortController = new AbortController();
-  const {setSuccess} = useSuccessNotification();
-  const {setError} = useErrorNotification();
-
-  const onCancelClicked = () => {
-    setError("You canceled the adding role request.")
-    setValue({});
-    abortController.abort('Submit request cancelled by the user')
-    navigate(-1);
-  };
-
-  const onPermissionChange = (id: PermissionType, level: string) => {
-    setValue({
-      permissions: value.permissions.map(permission => {
-        if (permission.id === id) {
-          permission.accessLevel = parseInt(level) as AccessLevel;
-        }
-        return permission
-      })
-    })
-  }
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setDisabled(true);
-    const data: ICreateUserRole = value;
-    // To start with index zero, I can't make the select icon start at 0
-    data.roleIcon = (data.roleIcon === 0) ? data.roleIcon : data.roleIcon - 1
-    const result = await sendRequest({endPoint: 'AddRole'}, abortController.signal, data)
-    const jsonData = await result.json();
-
-    if(!result.ok) {
-      setError(result.statusText)
-      setDisabled(false);
-      return;
-    }
-
-    setValue({})
-    setSuccess("New role has been added")
-    dispatch({
-      type: 'set/role',
-      payload: {
-        role: jsonData
-      }
-    });
-    navigate('/team', {replace: true})
-  }
-
+export const Form: FC<FormProps> = ({ disabled, onSubmit, onPermissionChange, onCancelClicked, setValue, values }) => {
   return (
     <Box>
       <form onSubmit={onSubmit}>
-      <CustomRoleName
-        sx={textField}
-        slotSx={textFieldInput}
-        name='name'
-        value={value.name}
-        onChange={e => setValue({name: e.target.value})}
-      />
-      <SelectRoleIcon>
-        <RoleIcon onChange={(_, newValue) => setValue({roleIcon: newValue!})} />
-      </SelectRoleIcon>
-      <Box sx={{ marginTop: '24px', marginBottom: '12px' }}>
-        <Typography
-          variant="h2"
-          component="h3"
-          sx={{
-            fontSize: '22px',
-            color: 'colors.textHeadline',
-          }}>
-          Permissions
-        </Typography>
-      </Box>
-
-      <Box>
-        <Grid
-          container
-          spacing={4}>
-          {/* Locks */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="locks-permissions"
-                title="Locks"
-                // value={value.permissions[0].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.Locks, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Activate Lock */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="activate-lock-permissions"
-                title="Activate Lock"
-                // value={value.permissions[1].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.ActivateLocks, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="No"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLargeLeft}
-                />
-                <PermissionsButtonControl
-                  label="Yes"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonLargeRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Inventory */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="inventory-permissions"
-                title="Inventory"
-                // value={value.permissions[2].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.Inventory, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Tenant Lock */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="tenant-locks-permissions"
-                title="Tenant Locks"
-                // value={value.permissions[3].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.TenantLocks, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Facilities */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="facilities-permissions"
-                title="Facilities"
-                // value={value.permissions[4].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.Facilities, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Transfer Facility */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="transfer-facilities-permissions"
-                title="Transfer Facilities"
-                // value={value.permissions[5].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.TransferFacilities, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="No"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLargeLeft}
-                />
-                <PermissionsButtonControl
-                  label="Yes"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonLargeRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* User */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="users-permissions"
-                title="User"
-                // value={value.permissions[6].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.Users, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Edit Admins */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="edit-admins-permissions"
-                title="Edit Admins"
-                // value={value.permissions[7].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.EditAdmins, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="No"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLargeLeft}
-                />
-                <PermissionsButtonControl
-                  label="Yes"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonLargeRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* Subdomains */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="subdomain-permissions"
-                title="Subdomain"
-                // value={value.permissions[8].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.Subdomains, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-          {/* API Settings */}
-          <Grow
-            in={true}
-            timeout={750}>
-            <Grid>
-              <PermissionsButtons
-                defaultValue={AccessLevel.None}
-                name="api-settings-permissions"
-                title="API"
-                // value={value.permissions[9].accessLevel}
-                onChange={(_, newValue) => onPermissionChange(PermissionType.ApiSettings, newValue)}
-                sx={permissionsLabel}>
-                <PermissionsButtonControl
-                  label="None"
-                  value={AccessLevel.None}
-                  sx={permissionsButtonLeft}
-                />
-                <PermissionsButtonControl
-                  label="View"
-                  value={AccessLevel.Read}
-                  sx={permissionsButtonMiddle}
-                />
-                <PermissionsButtonControl
-                  label="Edit"
-                  value={AccessLevel.Write}
-                  sx={permissionsButtonRight}
-                />
-              </PermissionsButtons>
-            </Grid>
-          </Grow>
-        </Grid>
-      </Box>
-      {/* Submit / Cancel: Buttons */}
-      <Grow
-        in={true}
-        timeout={750}>
-        <Box
-          sx={{
-            marginTop: '64px',
-          }}>
-          <Stack
-            spacing={3}
-            direction="row">
-            <ActionButton
-              title="Cancel"
-              onClickHandler={onCancelClicked}
-            />
-            <ActionButton 
-              type='submit' 
-              title={disabled ? "Custom Role Updating..." : "Save Changes"} 
-              selected
-              disabled={disabled} 
-              />
-          </Stack>
+        <CustomRoleName
+          sx={textField}
+          slotSx={textFieldInput}
+          name="name"
+          value={values.name}
+          onChange={(e) => setValue({ name: e.target.value })}
+        />
+        <SelectRoleIcon>
+          <RoleIcon
+            value={values.roleIcon}
+            onChange={(_, newValue) => setValue({ roleIcon: newValue! })}
+          />
+        </SelectRoleIcon>
+        <Box sx={{ marginTop: '24px', marginBottom: '12px' }}>
+          <Typography
+            variant="h2"
+            component="h3"
+            sx={{
+              fontSize: '22px',
+              color: 'colors.textHeadline',
+            }}>
+            Permissions
+          </Typography>
         </Box>
-      </Grow>
+        {/* Permissions Radio Buttons */}
+        <PermissionsContainer
+          onPermissionChange={onPermissionChange}
+          values={values}
+        />
+        {/* Submit / Cancel: Buttons */}
+        <Grow
+          in={true}
+          timeout={750}>
+          <Box
+            sx={{
+              marginTop: '64px',
+            }}>
+            <Stack
+              spacing={3}
+              direction="row">
+              <ActionButton
+                title="Cancel"
+                onClickHandler={onCancelClicked}
+              />
+              <ActionButton
+                type="submit"
+                title={disabled ? 'Custom Role Updating...' : 'Save Changes'}
+                selected
+                disabled={disabled}
+              />
+            </Stack>
+          </Box>
+        </Grow>
       </form>
     </Box>
   );

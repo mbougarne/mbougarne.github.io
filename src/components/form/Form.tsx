@@ -38,7 +38,7 @@ export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
 
   useEffect(() => {
     if (location.state?.form) {
-      const formData = location.state.form as ICreateUserRole;
+      const formData = location.state.form;
       setFormState(formData);
     }
   }, [location.state, setFormState, values]);
@@ -85,13 +85,20 @@ export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
       setDisabled(false);
       return;
     }
+    if (endpoint === 'AddRole') {
+      dispatch({
+        type: 'set/role',
+        payload: {
+          role: jsonData,
+        },
+      });
+    } else {
+      dispatch({
+        type: 'set/update',
+        payload: jsonData,
+      });
+    }
 
-    dispatch({
-      type: 'set/role',
-      payload: {
-        role: jsonData,
-      },
-    });
     setSuccess(
       endpoint === 'AddRole' ? 'The new role create' : 'The role updated',
     );

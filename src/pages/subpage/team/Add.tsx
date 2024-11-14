@@ -1,31 +1,8 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Page } from '@/pages/Page';
-import { Form as RoleForm } from '@/components/form';
-import { AccessLevel, IPermission, PermissionType } from '@/types';
-
-interface UserFormState {
-  name: string;
-  roleIcon: number;
-  permissions: IPermission[];
-}
-
-const initialState: UserFormState = {
-  name: '',
-  roleIcon: 1,
-  permissions: [
-    { id: PermissionType.Locks, accessLevel: AccessLevel.None },
-    { id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None },
-    { id: PermissionType.Inventory, accessLevel: AccessLevel.None },
-    { id: PermissionType.TenantLocks, accessLevel: AccessLevel.None },
-    { id: PermissionType.Facilities, accessLevel: AccessLevel.None },
-    { id: PermissionType.TransferFacilities, accessLevel: AccessLevel.None },
-    { id: PermissionType.Users, accessLevel: AccessLevel.None },
-    { id: PermissionType.EditAdmins, accessLevel: AccessLevel.None },
-    { id: PermissionType.Subdomains, accessLevel: AccessLevel.None },
-    { id: PermissionType.ApiSettings, accessLevel: AccessLevel.None },
-  ],
-};
+import { AddRoleForm } from '@/components/form';
+import { initialState } from '@/types';
 
 export const AddRole: FC = () => {
   return (
@@ -46,10 +23,7 @@ export const AddRole: FC = () => {
           Configure general information and permissions below. Don’t forget to
           save the Custom Role.
         </Typography>
-        <RoleForm
-          initialState={initialState}
-          endpoint="AddRole"
-        />
+        <AddRoleForm initialState={initialState} />
       </Box>
     </Page>
   );

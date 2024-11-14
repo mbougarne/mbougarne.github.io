@@ -14,7 +14,8 @@ type DispatchType =
   | 'set/error'
   | 'set/roles'
   | 'set/role'
-  | 'set/delete';
+  | 'set/delete'
+  | 'set/update';
 
 interface DispatcherInterface {
   type: DispatchType;
@@ -55,6 +56,18 @@ export const mainReducer = (
       return {
         ...state,
         roles: [...state.roles, payload.role],
+      };
+    }
+    case 'set/update': {
+      return {
+        ...state,
+        roles: state.roles.map((role) => {
+          if (role.id === payload.role.id) {
+            role = payload.role;
+          }
+
+          return role;
+        }),
       };
     }
     case 'set/delete': {

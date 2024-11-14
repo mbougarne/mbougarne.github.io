@@ -38,8 +38,32 @@ export interface ICreateUserRole {
 }
 
 export interface IUpdateUserRole {
-  id: string;
+  id?: string;
   name: string;
   roleIcon: number;
   permissions: IPermission[];
 }
+
+interface UserFormState {
+  id?: string;
+  name: string;
+  roleIcon: number;
+  permissions: IPermission[];
+}
+
+export const initialState: UserFormState = {
+  name: '',
+  roleIcon: 1,
+  permissions: [
+    { id: PermissionType.Locks, accessLevel: AccessLevel.None },
+    { id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None },
+    { id: PermissionType.Inventory, accessLevel: AccessLevel.None },
+    { id: PermissionType.TenantLocks, accessLevel: AccessLevel.None },
+    { id: PermissionType.Facilities, accessLevel: AccessLevel.None },
+    { id: PermissionType.TransferFacilities, accessLevel: AccessLevel.None },
+    { id: PermissionType.Users, accessLevel: AccessLevel.None },
+    { id: PermissionType.EditAdmins, accessLevel: AccessLevel.None },
+    { id: PermissionType.Subdomains, accessLevel: AccessLevel.None },
+    { id: PermissionType.ApiSettings, accessLevel: AccessLevel.None },
+  ],
+};

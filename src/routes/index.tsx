@@ -14,6 +14,7 @@ import {
 } from '@/pages';
 import { RoutesError } from '@/components';
 import { loadRoles } from '@/loaders';
+import { EditRole } from '@/pages/subpage/team';
 
 export const routes = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const routes = createBrowserRouter([
           {
             path: 'team/add-role',
             element: <AddRole />,
+          },
+          {
+            path: 'team/edit-role',
+            element: <EditRole />,
           },
         ],
       },
