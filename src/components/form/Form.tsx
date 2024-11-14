@@ -5,6 +5,7 @@ import { useErrorNotification, useForm, useSuccessNotification } from '@/hooks';
 import {
   AccessLevel,
   ICreateUserRole,
+  IPermission,
   IUpdateUserRole,
   PermissionType,
 } from '@/types';
@@ -20,17 +21,43 @@ import {
 import { textField, textFieldInput } from './styles';
 
 interface FormProps {
-  initialState: ICreateUserRole | IUpdateUserRole;
+  initialState?: ICreateUserRole | IUpdateUserRole;
   endpoint: 'UpdateRole' | 'AddRole';
 }
 
-export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
+interface UserFormState {
+  id?: string;
+  name: string;
+  roleIcon: number;
+  permissions: IPermission[];
+}
+
+const initialState: UserFormState = {
+  name: '',
+  roleIcon: 1,
+  permissions: [
+    { id: PermissionType.Locks, accessLevel: AccessLevel.None },
+    { id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None },
+    { id: PermissionType.Inventory, accessLevel: AccessLevel.None },
+    { id: PermissionType.TenantLocks, accessLevel: AccessLevel.None },
+    { id: PermissionType.Facilities, accessLevel: AccessLevel.None },
+    { id: PermissionType.TransferFacilities, accessLevel: AccessLevel.None },
+    { id: PermissionType.Users, accessLevel: AccessLevel.None },
+    { id: PermissionType.EditAdmins, accessLevel: AccessLevel.None },
+    { id: PermissionType.Subdomains, accessLevel: AccessLevel.None },
+    { id: PermissionType.ApiSettings, accessLevel: AccessLevel.None },
+  ],
+};
+
+console.log({ initialState });
+
+export const Form: FC<FormProps> = ({ endpoint }) => {
   const { dispatch } = useContext(userContext);
   const [disabled, setDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { values, setValue, setFormState } =
-    useForm<typeof initialState>(initialState);
+    useForm<UserFormState>(initialState);
   const { setSuccess } = useSuccessNotification();
   const { setError } = useErrorNotification();
 
@@ -41,7 +68,7 @@ export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
       const formData = location.state.form;
       setFormState(formData);
     }
-  }, [location.state, setFormState, values]);
+  }, [location.state, setFormState]);
 
   const onCancelClicked = () => {
     setError('You canceled the adding role request.');
