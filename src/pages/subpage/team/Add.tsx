@@ -4,15 +4,15 @@ import { Page } from '@/pages/Page';
 import { Form as RoleForm } from '@/components/form';
 import { AccessLevel, IPermission, PermissionType } from '@/types';
 
-interface UserFormProps {
+interface UserFormState {
   name: string;
   roleIcon: number;
   permissions: IPermission[];
 }
 
-const initialState: UserFormProps = {
+const initialState: UserFormState = {
   name: '',
-  roleIcon: 0,
+  roleIcon: 1,
   permissions: [
     { id: PermissionType.Locks, accessLevel: AccessLevel.None },
     { id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None },

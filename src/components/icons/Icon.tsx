@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+// import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 import {
   AddRoleIcon,
@@ -22,6 +22,7 @@ import {
   SettingsIcon,
   VendorIcon,
 } from './svgFiles';
+import { Box, BoxProps } from '@mui/material';
 
 enum IconNames {
   AddRoleIcon = 'AddRoleIcon',
@@ -47,7 +48,7 @@ enum IconNames {
 
 export type IconName = `${IconNames}`;
 
-type IconProps = SvgIconProps & { name: IconName };
+type IconProps = BoxProps & { name: IconName };
 
 const SvgFromName: FC<{ name: IconName }> = ({ name }) => {
   switch (name) {
@@ -94,8 +95,8 @@ const SvgFromName: FC<{ name: IconName }> = ({ name }) => {
 
 export const Icon: FC<IconProps> = ({ name, ...props }) => {
   return (
-    <SvgIcon {...props}>
+    <Box {...props}>
       <SvgFromName name={name} />
-    </SvgIcon>
+    </Box>
   );
 };

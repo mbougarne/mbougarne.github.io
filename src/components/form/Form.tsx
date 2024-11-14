@@ -1,6 +1,6 @@
-import { FC, FormEvent, useContext, useState } from 'react';
+import { FC, FormEvent, useContext, useEffect, useState } from 'react';
 import { Box, Grow, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useErrorNotification, useForm, useSuccessNotification } from '@/hooks';
 import {
   AccessLevel,
@@ -28,12 +28,20 @@ export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
   const { dispatch } = useContext(userContext);
   const [disabled, setDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  const [values, setValue] = useForm<typeof initialState>(initialState);
+  const location = useLocation();
+  const { values, setValue, setFormState } =
+    useForm<typeof initialState>(initialState);
   const { setSuccess } = useSuccessNotification();
   const { setError } = useErrorNotification();
 
   const abortController = new AbortController();
+
+  useEffect(() => {
+    if (location.state?.form) {
+      const formData = location.state.form as ICreateUserRole;
+      setFormState(formData);
+    }
+  }, [location.state, setFormState, values]);
 
   const onCancelClicked = () => {
     setError('You canceled the adding role request.');
@@ -102,6 +110,7 @@ export const Form: FC<FormProps> = ({ initialState, endpoint }) => {
         />
         <SelectRoleIcon>
           <RoleIcon
+            value={values.roleIcon}
             onChange={(_, newValue) => setValue({ roleIcon: newValue! })}
           />
         </SelectRoleIcon>

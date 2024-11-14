@@ -22,7 +22,7 @@ interface PermissionsButtonsProps {
 
 export const PermissionsButtons: FC<
   PropsWithChildren<PermissionsButtonsProps>
-> = ({ children, name, sx, title, onChange, defaultValue = '' }) => {
+> = ({ children, name, sx, title, onChange, value, defaultValue = '' }) => {
   return (
     <FormControl>
       <FormLabel
@@ -33,6 +33,7 @@ export const PermissionsButtons: FC<
       <RadioGroup
         aria-labelledby={name}
         defaultValue={defaultValue}
+        value={value}
         name={name}
         defaultChecked
         onChange={onChange}

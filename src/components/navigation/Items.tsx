@@ -58,7 +58,7 @@ export const Items: FC = () => {
                     position: 'absolute',
                     zIndex: -1,
                   },
-                  '&:hover .MuiSvgIcon-root': {
+                  '&:hover .MuiBox-root': {
                     backgroundColor: 'colors.navIconHover',
                     borderRadius: '50%',
                   },
@@ -88,11 +88,13 @@ export const Items: FC = () => {
                   <Icon
                     name={nameToSvg[text]}
                     sx={{
-                      fontSize: 44,
-                      padding: '7px',
+                      padding: '12px',
+                      width: '44px',
+                      height: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       color: 'colors.navIcon',
-                      textAlign: 'center',
-                      alignSelf: 'center',
                       ...(isActive && {
                         backgroundColor: 'colors.navIconHover',
                         borderRadius: '50%',

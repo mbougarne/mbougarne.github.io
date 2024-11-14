@@ -26,7 +26,6 @@ export const RoleCardAvatar: FC<RoleCardAvatarProps> = ({ name, roleIcon }) => {
           name={iconIndexName[roleIcon]}
           sx={{
             overflow: 'visible',
-            marginLeft: '-40px',
             color: 'colors.cardIcon',
           }}
         />
@@ -37,6 +36,7 @@ export const RoleCardAvatar: FC<RoleCardAvatarProps> = ({ name, roleIcon }) => {
         sx={{
           color: 'colors.textHeadline',
           textAlign: 'center',
+          textTransform: 'capitalize',
         }}>
         {name}
       </Typography>

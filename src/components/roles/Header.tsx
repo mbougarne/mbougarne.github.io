@@ -17,6 +17,9 @@ export const RoleCardHeader: FC<{ isCustom: boolean; id: string }> = ({
         setOpen={setShow}
       />
       <CardHeader
+        sx={{
+          minHeight: '70px',
+        }}
         action={
           isCustom && (
             <>

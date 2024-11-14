@@ -26,11 +26,14 @@ export const BackButton: FC = () => {
           '&:hover': {
             backgroundColor: 'transparent',
           },
-          '&:hover .MuiTypography-root, &:hover .MuiSvgIcon-root': {
+          '&:hover .MuiTypography-root, &:hover .MuiBox-root': {
             color: '#33C173',
           },
         }}>
-        <Icon name="BackArrowIcon" />
+        <Icon
+          name="BackArrowIcon"
+          sx={{ overflow: 'visible', display: 'flex' }}
+        />
         <Typography
           variant="subtitle1"
           component="span">

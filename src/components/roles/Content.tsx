@@ -11,7 +11,15 @@ export const RoleCardContent: FC<{ role: IUserRole }> = ({ role }) => {
   const navigate = useNavigate();
 
   const onActionClicked = () => {
-    navigate('add-role', { state: { role } });
+    navigate('add-role', {
+      state: {
+        form: {
+          name: role.name,
+          roleIcon: role.roleIcon + 1,
+          permissions: role.permissions,
+        },
+      },
+    });
   };
 
   return (
