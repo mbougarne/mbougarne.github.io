@@ -6,9 +6,15 @@ export interface InitialContextStateInterface {
   notification: string;
   error: string;
   role?: IUserRole;
+  showDelete?: boolean;
 }
 
-type DispatchType = 'set/notification' | 'set/error' | 'set/roles' | 'set/role';
+type DispatchType =
+  | 'set/notification'
+  | 'set/error'
+  | 'set/roles'
+  | 'set/role'
+  | 'set/delete';
 
 interface DispatcherInterface {
   type: DispatchType;
@@ -49,6 +55,12 @@ export const mainReducer = (
       return {
         ...state,
         roles: [...state.roles, payload.role],
+      };
+    }
+    case 'set/delete': {
+      return {
+        ...state,
+        showDelete: payload.showDelete,
       };
     }
     default:

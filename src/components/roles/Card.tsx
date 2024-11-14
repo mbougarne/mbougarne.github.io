@@ -26,7 +26,10 @@ export const RoleCard: FC<RoleCardProps> = ({ role }) => {
             filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
           },
         }}>
-        <RoleCardHeader isCustom={role.isCustom} />
+        <RoleCardHeader
+          id={role.id}
+          isCustom={role.isCustom}
+        />
         <RoleCardContent role={role} />
       </Card>
     </Grow>

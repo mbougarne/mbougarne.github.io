@@ -3,7 +3,7 @@ import { ICreateUserRole, IUpdateUserRole } from '@/types';
 type EndPoint = 'DeleteRole' | 'UpdateRole' | 'AddRole' | 'Roles';
 type GetUrlProps = {
   endPoint: EndPoint;
-  id?: number;
+  id?: string;
 };
 type GenerateReturn = {
   path: string;

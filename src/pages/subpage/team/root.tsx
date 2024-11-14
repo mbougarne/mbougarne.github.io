@@ -7,10 +7,6 @@ import { Page } from '@/pages/Page';
 export const Team: FC = () => {
   const { state } = useContext(userContext);
 
-  if (!state.roles.length) {
-    return null;
-  }
-
   return (
     <Page title="User Roles">
       <Box
