@@ -1,14 +1,14 @@
 export enum PermissionType {
-  Locks = '1',
-  ActivateLocks = '2',
-  Inventory = '3',
-  TenantLocks = '4',
-  Facilities = '5',
-  TransferFacilities = '6',
-  Users = '7',
-  EditAdmins = '8',
-  Subdomains = '9',
-  ApiSettings = '10',
+  Locks = 1,
+  ActivateLocks = 2,
+  Inventory = 3,
+  TenantLocks = 4,
+  Facilities = 5,
+  TransferFacilities = 6,
+  Users = 7,
+  EditAdmins = 8,
+  Subdomains = 9,
+  ApiSettings = 10,
 }
 
 export enum AccessLevel {
@@ -38,14 +38,13 @@ export interface ICreateUserRole {
 }
 
 export interface IUpdateUserRole {
-  id?: string;
+  id: string;
   name: string;
   roleIcon: number;
   permissions: IPermission[];
 }
 
-interface UserFormState {
-  id?: string;
+export interface UserFormState {
   name: string;
   roleIcon: number;
   permissions: IPermission[];

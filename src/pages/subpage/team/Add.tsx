@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Page } from '@/pages/Page';
 import { AddRoleForm } from '@/components/form';
-import { initialState } from '@/types';
 
 export const AddRole: FC = () => {
   return (
@@ -23,7 +22,7 @@ export const AddRole: FC = () => {
           Configure general information and permissions below. Don’t forget to
           save the Custom Role.
         </Typography>
-        <AddRoleForm initialState={initialState} />
+        <AddRoleForm />
       </Box>
     </Page>
   );

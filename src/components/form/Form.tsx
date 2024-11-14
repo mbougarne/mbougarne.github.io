@@ -1,16 +1,5 @@
-import { FC, FormEvent, useContext, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Box, Grow, Stack, Typography } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useErrorNotification, useForm, useSuccessNotification } from '@/hooks';
-import {
-  AccessLevel,
-  ICreateUserRole,
-  IPermission,
-  IUpdateUserRole,
-  PermissionType,
-} from '@/types';
-import { sendRequest } from '@/helpers';
-import { userContext } from '@/store';
 import {
   ActionButton,
   CustomRoleName,
@@ -19,119 +8,27 @@ import {
   SelectRoleIcon,
 } from './inputs';
 import { textField, textFieldInput } from './styles';
+import { ICreateUserRole, PermissionType } from '@/types';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExtractInputKeys<T> = Partial<Record<keyof T, any>>;
 interface FormProps {
-  initialState?: ICreateUserRole | IUpdateUserRole;
-  endpoint: 'UpdateRole' | 'AddRole';
+  disabled: boolean;
+  values: ICreateUserRole & { id?: string };
+  setValue: (v: ExtractInputKeys<ICreateUserRole>) => void;
+  onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  onPermissionChange: (id: PermissionType, level: string) => void;
+  onCancelClicked: () => void;
 }
 
-interface UserFormState {
-  id?: string;
-  name: string;
-  roleIcon: number;
-  permissions: IPermission[];
-}
-
-const initialState: UserFormState = {
-  name: '',
-  roleIcon: 1,
-  permissions: [
-    { id: PermissionType.Locks, accessLevel: AccessLevel.None },
-    { id: PermissionType.ActivateLocks, accessLevel: AccessLevel.None },
-    { id: PermissionType.Inventory, accessLevel: AccessLevel.None },
-    { id: PermissionType.TenantLocks, accessLevel: AccessLevel.None },
-    { id: PermissionType.Facilities, accessLevel: AccessLevel.None },
-    { id: PermissionType.TransferFacilities, accessLevel: AccessLevel.None },
-    { id: PermissionType.Users, accessLevel: AccessLevel.None },
-    { id: PermissionType.EditAdmins, accessLevel: AccessLevel.None },
-    { id: PermissionType.Subdomains, accessLevel: AccessLevel.None },
-    { id: PermissionType.ApiSettings, accessLevel: AccessLevel.None },
-  ],
-};
-
-console.log({ initialState });
-
-export const Form: FC<FormProps> = ({ endpoint }) => {
-  const { dispatch } = useContext(userContext);
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { values, setValue, setFormState } =
-    useForm<UserFormState>(initialState);
-  const { setSuccess } = useSuccessNotification();
-  const { setError } = useErrorNotification();
-
-  const abortController = new AbortController();
-
-  useEffect(() => {
-    if (location.state?.form) {
-      const formData = location.state.form;
-      setFormState(formData);
-    }
-  }, [location.state, setFormState]);
-
-  const onCancelClicked = () => {
-    setError('You canceled the adding role request.');
-    abortController.abort('Submit request cancelled by the user');
-    navigate(-1);
-  };
-
-  const onPermissionChange = (id: PermissionType, level: string) => {
-    setValue({
-      permissions: values.permissions.map((permission) => {
-        if (permission.id === id) {
-          permission.accessLevel = parseInt(level) as AccessLevel;
-        }
-        return permission;
-      }),
-    });
-  };
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setSuccess(
-      endpoint === 'AddRole' ? 'Creating new role...' : 'Updating role...',
-    );
-    setDisabled(true);
-
-    // To start with index zero, I can't make the select icon start at 0
-    const data: ICreateUserRole = values;
-    data.roleIcon = data.roleIcon === 0 ? data.roleIcon : data.roleIcon - 1;
-
-    const result = await sendRequest(
-      { endPoint: endpoint },
-      abortController.signal,
-      data,
-    );
-    const jsonData = await result.json();
-
-    if (!result.ok) {
-      const errorMessage = await result.text();
-      setError(`${result.statusText}: ${errorMessage}`);
-      setDisabled(false);
-      return;
-    }
-    if (endpoint === 'AddRole') {
-      dispatch({
-        type: 'set/role',
-        payload: {
-          role: jsonData,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'set/update',
-        payload: jsonData,
-      });
-    }
-
-    setSuccess(
-      endpoint === 'AddRole' ? 'The new role create' : 'The role updated',
-    );
-    navigate('/team', { replace: true });
-  };
-
+export const Form: FC<FormProps> = ({
+  disabled,
+  onSubmit,
+  values,
+  setValue,
+  onPermissionChange,
+  onCancelClicked,
+}) => {
   return (
     <Box>
       <form onSubmit={onSubmit}>

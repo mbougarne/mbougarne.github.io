@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Page } from '@/pages/Page';
 import { EditRoleForm } from '@/components/form';
-import { initialState } from '@/types';
 
 export const EditRole: FC = () => {
   return (
@@ -23,7 +22,7 @@ export const EditRole: FC = () => {
           Configure general information and permissions below. Don’t forget to
           save the Custom Role.
         </Typography>
-        <EditRoleForm initialState={initialState} />
+        <EditRoleForm />
       </Box>
     </Page>
   );

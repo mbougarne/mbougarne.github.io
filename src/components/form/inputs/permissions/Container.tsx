@@ -44,9 +44,9 @@ export const PermissionsContainer: FC<PermissionsContainerProps> = ({
                 name="locks-permissions"
                 title="Locks"
                 value={values.permissions[0].accessLevel}
-                onChange={(_, newValue) =>
-                  onPermissionChange(PermissionType.Locks, newValue)
-                }
+                onChange={(_, newValue) => {
+                  onPermissionChange(PermissionType.Locks, newValue);
+                }}
                 sx={permissionsLabel}>
                 <PermissionsButtonControl
                   label="None"
@@ -213,7 +213,7 @@ export const PermissionsContainer: FC<PermissionsContainerProps> = ({
                 />
                 <PermissionsButtonControl
                   label="Yes"
-                  value={AccessLevel.Read}
+                  value={AccessLevel.Write}
                   sx={permissionsButtonLargeRight}
                 />
               </PermissionsButtons>
@@ -272,7 +272,7 @@ export const PermissionsContainer: FC<PermissionsContainerProps> = ({
                 />
                 <PermissionsButtonControl
                   label="Yes"
-                  value={AccessLevel.Read}
+                  value={AccessLevel.Write}
                   sx={permissionsButtonLargeRight}
                 />
               </PermissionsButtons>
