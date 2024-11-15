@@ -26,7 +26,6 @@ jobs:
         cache-dependency-path: 'pnpm-lock.yaml'
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
     - run: npm install -g pnpm
     - run: pnm --version 
     - run: pnpm run lint
