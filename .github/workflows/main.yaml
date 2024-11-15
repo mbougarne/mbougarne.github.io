@@ -28,5 +28,6 @@ jobs:
         cache: 'npm'
     - run: npm install -g pnpm
     - run: npm --version 
+    - run: pnpm install
     - run: pnpm run lint
     - run: pnpm run build
