@@ -23,10 +23,11 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
+        cache-dependency-path: 'pnpm-lock.yaml'
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
     - run: npm install -g pnpm
-    - run: pnm --version 
+    - run: npm --version 
+    - run: pnpm install
     - run: pnpm run lint
     - run: pnpm run build
