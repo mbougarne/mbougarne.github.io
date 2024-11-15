@@ -1,0 +1,7 @@
+services:
+  app:
+    image: app:latest
+    build:
+      context: .
+    ports:
+      - ${APP_PORT:-80}:5173
