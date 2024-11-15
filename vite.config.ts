@@ -17,15 +17,15 @@ export default defineConfig({
       include: '**/*.svg',
     }),
   ],
-  test: {
-    // support `describe`, `test` etc. globally,
-    // so you don't need to import them every time
-    globals: true,
-    // run tests in jsdom environment
-    environment: 'jsdom',
-    // global test setup
-    setupFiles: './tests/setup.ts',
-  },
+  // test: {
+  //   // support `describe`, `test` etc. globally,
+  //   // so you don't need to import them every time
+  //   globals: true,
+  //   // run tests in jsdom environment
+  //   environment: 'jsdom',
+  //   // global test setup
+  //   setupFiles: './tests/setup.ts',
+  // },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
