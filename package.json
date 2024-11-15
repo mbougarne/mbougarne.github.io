@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://mbougarne.github.io/",
   "scripts": {
     "dev": "vite $1",
     "build": "tsc -b && vite build",

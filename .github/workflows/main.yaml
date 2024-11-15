@@ -26,8 +26,30 @@ jobs:
         cache-dependency-path: 'pnpm-lock.yaml'
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install -g pnpm
-    - run: npm --version 
-    - run: pnpm install
-    - run: pnpm run lint
-    - run: pnpm run build
+    - name: Install Dependencies
+      run: 
+        npm install -g pnpm
+        pnpm install
+    - name: Lint  
+      run: pnpm run lint
+    - name: Build the project
+      run: pnpm run build
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+          name: production-files
+          path: ./dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-files
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUBPAGES }}
+          publish_dir: ./dist
