@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 import {
   AddRoleIcon,

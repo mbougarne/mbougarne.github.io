@@ -29,7 +29,7 @@ export const AppLoader: FC = () => {
           height: 5,
           marginTop: '-7px',
           backgroundColor: '#33C173',
-          '& .css-l16vtb-MuiLinearProgress-bar1': {
+          '& .MuiLinearProgress-bar': {
             backgroundColor: '#258D54',
           },
         }}

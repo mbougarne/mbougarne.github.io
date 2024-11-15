@@ -26,8 +26,6 @@ export const Items: FC = () => {
 
   const HoverEffect = () =>
     mode === 'dark' ? <HoverPlaceholderDark /> : <HoverPlaceholder />;
-  const cssAfterSvg: string =
-    mode === 'dark' ? 'hover-effect-dark' : 'hover-effect';
 
   return (
     <>
@@ -51,18 +49,25 @@ export const Items: FC = () => {
                   '&:hover': {
                     backgroundColor: 'transparent',
                   },
-                  '&:hover::before': {
-                    content: `url("/src/assets/${cssAfterSvg}.svg")`,
-                    display: 'block',
-                    fontSize: 5,
-                    position: 'absolute',
-                    zIndex: -1,
+                  '&:hover .after-hover': {
+                    display: 'block!important',
                   },
                   '&:hover .MuiBox-root': {
                     backgroundColor: 'colors.navIconHover',
                     borderRadius: '50%',
                   },
                 }}>
+                <i
+                  className="after-hover"
+                  style={{
+                    display: 'none',
+                    marginLeft: '0',
+                    fontSize: 5,
+                    position: 'absolute',
+                    zIndex: -1,
+                  }}>
+                  <HoverEffect />
+                </i>
                 <ListItemIcon
                   sx={{
                     width: 44,
